@@ -3,7 +3,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
+  "proxy": "http://10.170.139.191:5000",
   "dependencies": {
     "@electron/remote": "^2.0.8",
     "@emotion/react": "^11.8.1",
