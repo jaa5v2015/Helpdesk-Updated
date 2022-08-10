@@ -9,6 +9,7 @@ const Incident = props =>{
     
     const toggleInfo= () =>{
         toggleData(!showData)
+        
     }
 
     
@@ -17,11 +18,12 @@ const Incident = props =>{
 
     return(
         
-        <div class="incident">
+        <div onClick={toggleInfo} class="incident">
         
-            <div onClick={toggleInfo}> <BiInfoCircle/> {showData && <Popup data={props.data} choice={"incident"}/>} </div>
-
-            <p1>{props.data.assignedTo} </p1>
+            
+            
+            {showData && <Popup data={props.data} choice={"incident"}/>}
+            <p1>{props.data.assignedTo}</p1>
             <p1>{props.data.caller}</p1>
             <p1>{props.data.timeCreated.getMonth() + 1}/{props.data.timeCreated.getDate()}/{props.data.timeCreated.getFullYear()}</p1>
             <p1>{props.data.contactType}</p1>

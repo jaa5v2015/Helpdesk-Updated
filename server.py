@@ -132,7 +132,7 @@ conn = pyodbc.connect('Driver={SQL Server};'
                       'Database=helpdesk;'
                       'Trusted_Connection=Yes;')
 
-data = pd.read_sql_query('SELECT * from incident', conn)
+data = pd.read_sql_query('SELECT * from incident2 order by assigned_to', conn)
 
 df1 = data[['assigned_to', 'category', 'calendar_stc','subcategory','contact_type', 'sys_created_on', 'caller_id', 'state', 'priority', ]]
 ser = pd.Series(df1['assigned_to'])
@@ -305,7 +305,7 @@ for ele in employeeList:
 
 #Create server
 members = Flask(__name__)
-contacts = Flask(__name__)
+#contacts = Flask(__name__)
 
 for ele in employeeList:
     incidents = []

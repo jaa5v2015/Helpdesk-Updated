@@ -7,7 +7,7 @@ import DateSelector from "./components/DateSelector";
 
 
 
-export default class App extends React.Component {
+export default class  extends React.Component {
 
 
   constructor(props) {

@@ -3,7 +3,6 @@ import Graph from "./graph";
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import Pchart from "./Pie"
-import  RGL, {WidthProvider} from "react-grid-layout";
 import Table from "./table";
 import TimeGraph from "./timeChart";
 import IncidentPage from "./IncidentPage";
@@ -381,40 +380,21 @@ const Dashboard = props =>{
 if(props.dataChoice != "Incidents"){
   return(
     
-    <div className="grid-container">
-        
-        <div style={{display:"flex", flexDirection:'column', width:"90%",height:"95%", overflowY: "scroll"}}>
-            <div className="table">
-                <h3>Info</h3>
-                <h3>Employee</h3>
-                <h3> {props.dataChoice} Incidents</h3>
-                <h3>Avg resolve Time</h3>
-                
-                
-    
-            </div>
-            {
-              empData.map(emp =>
-                
-                <EmployeeStats employee={emp} dataChoice={props.dataChoice} />
-              )
-            }
-        </div> 
-          
-        <div className="graph">
-            <Graph data={empData} dataChoice={props.dataChoice}/>
-            
-
-        </div>
+    <div>
+      <div className="grid-container">
         <div className="graph">
          <TimeGraph data={empData} dataChoice={props.dataChoice} filterDate={props.filterDate}/>
-            
-
-        </div>
+          </div>
         <div className="graph">
             <Pchart data={empData} dataChoice={props.dataChoice}/>
         </div>
+
+        
        
+      </div>
+      <div className="graph"> 
+          <Graph data={empData} dataChoice={props.dataChoice}/>
+        </div>
     </div>
   )
 }
