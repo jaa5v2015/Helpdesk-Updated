@@ -1,13 +1,13 @@
 import React from "react"
 import Button from "@mui/material/Button"
 import Stack from "@mui/material/Stack"
-import Dashboard from "./components/Dashboard";
-import DateSelector from "./components/DateSelector";
+import Dashboard from "../Dashboard";
+import DateSelector from "../DateSelector";
+
+import {useLocation} from "react-router-dom"
 
 
-
-
-export default class  extends React.Component {
+class DashboardPage extends React.Component {
 
 
   constructor(props) {
@@ -69,8 +69,8 @@ export default class  extends React.Component {
 
 
     let filter = ticketList.filter(ticket => ticket.timeCreated < this.state.date && ticket.timeCreated > this.state.filterDate)
-
-
+    console.log("Log in state: ", this.props.loggedIn)
+    
   }
 
   componentWillUnmount() {
@@ -95,41 +95,57 @@ export default class  extends React.Component {
 
   }
 
+  useLocation = () =>{
+    let state = useLocation();
+    const loggedIn = state;
+    console.log(loggedIn)
+  }
+
 
 
 
 
   render() {
 
+   if(!this.props.isLoggedIn){
+    return (    
+        <div>
+            <h1>Blocked. Please login to view</h1>
+            
+        </div>
+    );
+   }
+   else{
     return (
 
-      <div className="App">
-        
-        
-         
-        <Stack direction="row" spacing={2}>
-
-          <Button variant="contained" onClick={() => this.changeData("Total")} >Total Stats</Button>
-          <Button variant="contained" onClick={() => this.changeData("Access")}  >Access Stats</Button>
-          <Button variant="contained" onClick={() => this.changeData("Help")} >Help / Assistance Stats</Button>
-          <Button variant="contained" onClick={() => this.changeData("Fail")}  >Failure Stats</Button>
-          <Button variant="contained" onClick={() => this.changeData("Incidents")}  >View Stats</Button>
-          <DateSelector filterDate={this.setFromDate} label={"From"} />
-          <p3> ____</p3>
-          <DateSelector filterDate={this.setToDate} label={"To"} />
-          {console.log(this.state)}
-        </Stack>
+        <div className="App">
           
-        <div className="App2">
-
-          <Dashboard mounted={this.state.mounted} data={this.state.data} dataChoice={this.state.dataChoice} filterDate={this.state.filterDate} date={this.state.date} />
-
-
+          
+           {console.log("props:", this.props)}
+          <Stack direction="row" spacing={2}>
+  
+            <Button variant="contained" onClick={() => this.changeData("Total")} >Total Stats</Button>
+            <Button variant="contained" onClick={() => this.changeData("Access")}  >Access Stats</Button>
+            <Button variant="contained" onClick={() => this.changeData("Help")} >Help / Assistance Stats</Button>
+            <Button variant="contained" onClick={() => this.changeData("Fail")}  >Failure Stats</Button>
+            <Button variant="contained" onClick={() => this.changeData("Incidents")}  >View Stats</Button>
+            <DateSelector filterDate={this.setFromDate} label={"From"} />
+            <p3> ____</p3>
+            <DateSelector filterDate={this.setToDate} label={"To"} />
+            
+          </Stack>
+            {console.log(this.props)}
+          <div className="App2">
+  
+            <Dashboard mounted={this.state.mounted} data={this.state.data} dataChoice={this.state.dataChoice} filterDate={this.state.filterDate} date={this.state.date} />
+  
+  
+          </div>
         </div>
-      </div>
-
-
-    );
+  
+  
+      );
+   }
 
 
 
@@ -137,3 +153,5 @@ export default class  extends React.Component {
   }
 
 }
+
+export default DashboardPage;
