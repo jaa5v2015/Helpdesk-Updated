@@ -4,7 +4,7 @@ import "./style/table.css"
 import { BiInfoCircle } from "react-icons/bi";
 import Incident from "./incident";
 import Popup from "./popup";
-
+import React from 'react'
 
 const Table = props => {
 

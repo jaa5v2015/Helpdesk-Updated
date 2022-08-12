@@ -3,6 +3,7 @@ import {useState} from 'react';
 import { BiInfoCircle } from "react-icons/bi";
 import Popup from './popup';
 import { VscChevronDown } from "react-icons/vsc";
+import React from 'react'
 const Incident = props =>{
     const [showData, toggleData] = useState(false);
     

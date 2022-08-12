@@ -107,15 +107,7 @@ class DashboardPage extends React.Component {
 
   render() {
 
-   if(!this.props.isLoggedIn){
-    return (    
-        <div>
-            <h1>Blocked. Please login to view</h1>
-            
-        </div>
-    );
-   }
-   else{
+
     return (
 
         <div className="App">
@@ -128,7 +120,7 @@ class DashboardPage extends React.Component {
             <Button variant="contained" onClick={() => this.changeData("Access")}  >Access Stats</Button>
             <Button variant="contained" onClick={() => this.changeData("Help")} >Help / Assistance Stats</Button>
             <Button variant="contained" onClick={() => this.changeData("Fail")}  >Failure Stats</Button>
-            <Button variant="contained" onClick={() => this.changeData("Incidents")}  >View Stats</Button>
+            <Button variant="contained" onClick={() => this.changeData("Incidents")}  >View Incidents</Button>
             <DateSelector filterDate={this.setFromDate} label={"From"} />
             <p3> ____</p3>
             <DateSelector filterDate={this.setToDate} label={"To"} />
@@ -145,7 +137,7 @@ class DashboardPage extends React.Component {
   
   
       );
-   }
+   
 
 
 

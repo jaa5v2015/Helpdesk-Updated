@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Incident from "./incident";
+import React from 'react'
 import "../App.css";
 const Popup = props =>{
   

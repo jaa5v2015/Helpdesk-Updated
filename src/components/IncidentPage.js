@@ -1,13 +1,9 @@
 import Incident from "./incident"
 import React, {useState, useEffect} from "react"
 import SearchFilter from "./Dropdown"
-import { AiTwotoneFunnelPlot, AiFillCaretUp, AiFillCaretDown} from "react-icons/ai";
+import { AiTwotoneFunnelPlot} from "react-icons/ai";
 import "../App.css"
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+
 
 
 
