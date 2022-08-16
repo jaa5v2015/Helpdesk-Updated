@@ -10,140 +10,128 @@ import {useLocation} from "react-router-dom"
 class DashboardPage extends React.Component {
 
 
-  constructor(props) {
+  constructor(props){
     super(props);
     this.state = {
       data: [],
       dataChoice: "Total",
       activeData: [],
+      activeEmployees: ["TWRA Intern (BH05115)", "Tom Wochna (BH01558)", "Zack Dover (BH05212)", "Jay Ghussein (BH05196)"],
       tickets: [],
       date: new Date(),
       filterDate: "",
       employeeList: [],
       mounted: false,
-     
-
+      
     }
   }
 
-  async componentDidMount() {
+  componentDidMount(){
     const e = []
     var data = []
-    let isMounted = true
-    
+    let isMounted=true
     fetch("/members").then(
       res => res.json()
     ).then(
-      data => {
+      data=> {
+        this.setState({data:data})
         
-        this.setState({ data: data })
-
       }
     )
-    this.state.activeEmployees.map(activeEmp => {
-      this.state.data.map(allEmp => {
-        if (allEmp.name == activeEmp) {
+    this.state.activeEmployees.map(activeEmp=>{
+      this.state.data.map(allEmp =>{
+        if(allEmp.name == activeEmp){
           e.push(allEmp)
         }
       })
     })
-    this.setState({ activeData: e })
+    this.setState({activeData: e})
     let ticketList = []
-
-    this.state.data.map(employee => {
-
-      employee.tickets.map(ticket => {
-        ticketList.push(ticket)
-
-        var date = new Date(ticket.timeCreated)
-        ticket.timeCreated = date;
-
-
-      })
-
-
-
-    })
-
-    this.setState({ tickets: ticketList })
-
-
-    let filter = ticketList.filter(ticket => ticket.timeCreated < this.state.date && ticket.timeCreated > this.state.filterDate)
-    console.log("Log in state: ", this.props.loggedIn)
     
+    this.state.data.map(employee =>{
+      
+        employee.tickets.map(ticket =>{
+           ticketList.push(ticket)
+           
+           var date = new Date(ticket.timeCreated)
+            ticket.timeCreated = date;
+       
+            
+        })
+
+
+       
+    })
+   
+   this.setState({tickets: ticketList})
+
+    
+    let filter = ticketList.filter( ticket =>ticket.timeCreated < this.state.date && ticket.timeCreated > this.state.filterDate)
+
+   
   }
 
-  componentWillUnmount() {
-    this.setState = (state, callback) => {
+  componentWillUnmount(){
+    this.setState = (state,callback) =>{
       return;
     }
   }
 
-  setFromDate = (date) => {
-    this.setState({ filterDate: date })
-   
-
-  }
-
-  setToDate = (date) => {
-    this.setState({ date: date })
+  setFromDate = (date) =>{
+    this.setState({filterDate: date})
     
   }
 
-  changeData = (e) => {
-    this.setState({ dataChoice: e })
-
+  setToDate = (date) =>{
+    this.setState({date: date})
   }
 
-  useLocation = () =>{
-    let state = useLocation();
-    const loggedIn = state;
-    console.log(loggedIn)
+  changeData = (e) =>{
+    this.setState({dataChoice: e})
+    
   }
 
 
 
 
 
-  render() {
-
+  render(){
 
     return (
+    
+      <div className="App">
+      
 
-        <div className="App">
-          
-          
-           {console.log("props:", this.props)}
-          <Stack direction="row" spacing={2}>
-  
-            <Button variant="contained" onClick={() => this.changeData("Total")} >Total Stats</Button>
-            <Button variant="contained" onClick={() => this.changeData("Access")}  >Access Stats</Button>
-            <Button variant="contained" onClick={() => this.changeData("Help")} >Help / Assistance Stats</Button>
-            <Button variant="contained" onClick={() => this.changeData("Fail")}  >Failure Stats</Button>
-            <Button variant="contained" onClick={() => this.changeData("Incidents")}  >View Incidents</Button>
-            <DateSelector filterDate={this.setFromDate} label={"From"} />
-            <p3> ____</p3>
-            <DateSelector filterDate={this.setToDate} label={"To"} />
-            
-          </Stack>
-            {console.log(this.props)}
-          <div className="App2">
-  
-            <Dashboard mounted={this.state.mounted} data={this.state.data} dataChoice={this.state.dataChoice} filterDate={this.state.filterDate} date={this.state.date} />
-  
-  
-          </div>
-        </div>
-  
-  
-      );
+   <Stack direction="row" spacing={2}>
    
+   <Button variant="contained"  onClick={()=> this.changeData("Total")} >Total Incidents</Button>
+      <Button variant="contained" onClick={()=> this.changeData("Access")}  >Access Incident</Button>
+      <Button variant="contained" onClick={()=> this.changeData("Help")} >Help / Assistance Incidents</Button>
+      <Button variant="contained"  onClick={()=> this.changeData("Fail")}  >Failure Incidents</Button>
+     <Button variant="contained"  onClick={()=> this.changeData("Incidents")}  >View Incidents</Button>
+     <DateSelector filterDate={this.setFromDate} label={"From"} />
+      <p3> ____</p3>
+     <DateSelector filterDate={this.setToDate} label={"To"} />
+   </Stack>
+
+   <div className="App2">
+            
+           <Dashboard mounted={this.state.mounted} data={this.state.data} dataChoice={this.state.dataChoice} filterDate={this.state.filterDate} date={this.state.date}/>
+         
+         
+   </div>
+ </div>
+
+
+);
 
 
 
 
   }
 
-}
+  }
+
+
 
 export default DashboardPage;

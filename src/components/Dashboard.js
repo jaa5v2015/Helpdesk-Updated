@@ -8,22 +8,24 @@ import TimeGraph from "./timeChart";
 import IncidentPage from "./IncidentPage";
 import Incident from "./incident";
 import EmployeeStats from "./employeeStats";
-import { AiOutlineConsoleSql } from "react-icons/ai";
+
 
 
 
 
 const Dashboard = props =>{
-
-  const [tickets, setTix] = useState([])
+  const [index, setIndex] = useState(0)
+  const [tickets, setTix] = useState()
   const [empData, setEmps] = useState([])
   const [filterDate, setFilterDate] = useState(props.filterDate)
   const [data, setData] = useState(props.data)
   const [date, setDate] = useState(props.date)
-
+  const [firstName, setName] = useState("")
   useEffect( async () =>{
     let isMounted = true;
     var ticketList = []
+   
+  
     //Set all tickets
     props.data.map(emp =>{
       emp.tickets.map(ticket =>{
@@ -33,19 +35,29 @@ const Dashboard = props =>{
       })
     })
     setTix(ticketList)
-
+    
     //Create data based on filter date
     let filter = ticketList.filter(ticket => ticket.timeCreated <= props.date && ticket.timeCreated >= props.filterDate )
     setTix(filter)
+   
+  
+
+    //console.log(props.data[0].name)
+
     setEmps(setEmpData(filter))
   
   },[props])
 
-  const setEmpData = (t) =>{
+
+
+
+  const setEmpData =  (t) =>{
+    const l = t
     let empList = []
     let subCats = []
     let contactList = []
-    let name = t[0].assignedTo
+  //  let name = t[0].assignedTo
+    let name = ""
     let count = 0
     let AccessIncidents = 0
     let AccessTime =0
@@ -79,10 +91,18 @@ const Dashboard = props =>{
     let hours = []
 
 
-
-  for(let i = 0; i < t.length; i++){
+    
+  for(let i = 0; i < t.length; i++)
+  {
+      if(i == 0){
+        name = t[i].assignedTo
+        
+      }
+      
+     
       if(name == t[i].assignedTo){
         count += 1;
+        
         time += parseInt(t[i].resolveTime)
         hours.push(t[i].timeCreated.getHours())
         tickets.push(t[i])
@@ -209,11 +229,12 @@ const Dashboard = props =>{
         }
         
         empList.push(emp)
-
+        
         
         subCats = []
         contactList = []
         name = t[i].assignedTo
+        
         count = 1
         AccessIncidents = 0
         AccessTime =0
@@ -388,6 +409,7 @@ if(props.dataChoice != "Incidents"){
         <div className="graph">
             <Pchart data={empData} dataChoice={props.dataChoice}/>
         </div>
+
 
         
        

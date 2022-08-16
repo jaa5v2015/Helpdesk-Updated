@@ -126,11 +126,12 @@ class contact(object):
 #Read in the Data
 
 
-
+#Conntect to data
 conn = pyodbc.connect('Driver={SQL Server};'
-                      'Server=BH0119DWR02933\SQLEXPRESS;'
+                      'Server=bh01wf65\DevSql2017;'
                       'Database=helpdesk;'
-                      'Trusted_Connection=Yes;')
+                      'uid=Helpdesk_app;'
+                      'pwd=Helpdesk#2022;')
 
 data = pd.read_sql_query('SELECT * from incident2 order by assigned_to', conn)
 
