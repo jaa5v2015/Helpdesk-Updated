@@ -141,3 +141,22 @@
   height: 35%;
   width: 30%;
 }
+
+.login {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 20%;
+  width:fit-content;
+  
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  box-shadow: 2px 2px 2px grey;
+
+}
+
+
+

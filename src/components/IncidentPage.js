@@ -3,6 +3,7 @@ import React, {useState, useEffect} from "react"
 import SearchFilter from "./Dropdown"
 import { AiTwotoneFunnelPlot} from "react-icons/ai";
 import "../App.css"
+import { Button } from "@mui/material";
 
 
 
@@ -16,11 +17,12 @@ const IncidentPage = props =>{
     const [direction, setDirection] = useState(false)
     const [value, setValue] = useState("Date")
     const [filteredList, setFilterd] = useState([])
+    const [user, setUser] = useState([])
 
     useEffect(()=>{
-      
+        setUser(props.user)
         var filterList = props.data
-        
+
             if(filters[0] != "None"){
                 filterList = filterList.filter(ticket => ticket.assignedTo == filters[0])
               
@@ -84,6 +86,7 @@ const IncidentPage = props =>{
               <h3>Filter </h3>
               <div style={{paddingRight: "10%"}} >
                 <AiTwotoneFunnelPlot fontSize="25px" onClick={toggleFilter} /> {showFilter && <SearchFilter data={props.data} filter={getFilters} toggle={toggleFilter} filterList={filters}/>}
+                {user.admin === true ? <Button variant="contained" >Edit Permissons</Button> : <span></span>}
               </div>
               <div>
                 

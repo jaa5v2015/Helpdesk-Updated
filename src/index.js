@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AzureAD } from 'react-aad-msal';
 import {authProvider} from "./Authentication/authProvider"
-
+import "./web.config";
 ReactDOM.render(
   
     

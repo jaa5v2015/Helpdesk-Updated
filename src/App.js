@@ -18,36 +18,26 @@ const App = () => {
 
 
   const [loggedIn, setLogin] = useState(false)
-  
-
-  const logIn = () =>{
-    setLogin(true)
-    console.log(loggedIn)
+  const [user, setUser] = useState()
+ 
+  const logIn = (bool) =>{
+    setLogin(bool)
+    
   }
-
-  const noLogin = () =>{
-    console.log(loggedIn)
+  const getUser = (user) =>{
+    setUser(user)
   }
-
-  
-
-
 
  
     return(
-      
-      <div>
-       
-      
-            
-            
-      <DashboardPage/>
-         
-         
-      </div>
-
-      /*<DashboardPage/>*/
-      
+      <BrowserRouter>
+        <Routes>
+          {console.log(user)}
+          {console.log(loggedIn)}
+          <Route path='/' element={<LoginPage logIn={logIn} getUser={getUser}/>}/>
+          <Route path='/dashboard' element={<DashboardPage loggedIn={loggedIn} user={user}/>}/>
+        </Routes>
+      </BrowserRouter>    
     );
   
 }

@@ -425,7 +425,7 @@ else{
   return(
    <div>
        
-       <IncidentPage data={tickets} dataChoice={props.dataChoice} filterDate={props.filterDate} />
+       <IncidentPage data={tickets} dataChoice={props.dataChoice} filterDate={props.filterDate} user={props.user} />
    </div>
   )
 }
